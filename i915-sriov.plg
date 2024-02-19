@@ -110,7 +110,7 @@ fi
 
 check() {
 if ! ls -1 &packages;/${KERNEL_V%%-*}/ | grep -q "${PACKAGE}" ; then
-  LAT_PACKAGE="$(wget -qO- https://api.github.com/repos/ich777/unraid-i915-sriov/releases/tags/${KERNEL_V} | jq -r '.assets[].name' | grep "${PACKAGE}" | grep -E -v '\.md5$' | sort -V | tail -1)"
+  LAT_PACKAGE="$(wget -qO- https://api.github.com/repos/giganode/unraid-i915-sriov/releases/tags/${KERNEL_V} | jq -r '.assets[].name' | grep "${PACKAGE}" | grep -E -v '\.md5$' | sort -V | tail -1)"
   echo
   echo "------------------Downloading SR-IOV package, please wait...!-----------------"
   echo "----------This could take some time, please don't close this window!----------"
@@ -182,7 +182,7 @@ fi
 #Define Variables
 KERNEL_V="$(uname -r)"
 PACKAGE="i915-sriov"
-DL_URL="https://github.com/ich777/unraid-i915-sriov/releases/download/$KERNEL_V"
+DL_URL="https://github.com/giganode/unraid-i915-sriov/releases/download/$KERNEL_V"
 
 if [ ! -d "&packages;/${KERNEL_V%%-*}" ]; then
   mkdir -p "&packages;/${KERNEL_V%%-*}"
