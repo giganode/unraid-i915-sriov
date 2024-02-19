@@ -1,7 +1,7 @@
 <?xml version='1.0' standalone='yes'?>
 <!DOCTYPE PLUGIN [
   <!ENTITY name      "i915-sriov">
-  <!ENTITY author    "ich777">
+  <!ENTITY author    "giganode">
   <!ENTITY version   "2023.11.22">
   <!ENTITY launch    "Settings/intel-&name;">
   <!ENTITY gitURL    "https://github.com/&author;/unraid-&name;/raw/master">
@@ -22,6 +22,9 @@
 
 
 <CHANGES>
+
+### 2024.02.19
+- Forked repository from ich777.
 
 ### 2023.11.22
 - Only apply patch for libvirt.php on Unraid versions lower than 6.13 - thanks SimonF for implementing that
