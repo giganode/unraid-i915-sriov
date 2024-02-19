@@ -18,7 +18,7 @@
         launch="&launch;"
         pluginURL="&pluginURL;"
         min="6.12.4"
-        support="https://forums.unraid.net/topic/136621-unraid-plugin-for-igpu-sr-iov-support">
+        support="https://forums.unraid.net/topic/154464-plugin-intel-igpu-sr-iov-support-page/">
 
 
 <CHANGES>
