@@ -3,7 +3,7 @@ mkdir -p /i915SRIOV/lib/modules/${UNAME}/kernel/drivers/gpu/drm/i915
 cd ${DATA_DIR}
 git clone https://github.com/strongtz/i915-sriov-dkms
 cd ${DATA_DIR}/i915-sriov-dkms
-git checkout master
+git checkout tags/2025.07.22
 PLUGIN_VERSION="$(git log -1 --format="%cs" | sed 's/-//g')"
 
 # Compile custom i915 SR-IOV module and copy it over to temporary location
