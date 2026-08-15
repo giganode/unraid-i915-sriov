@@ -3,12 +3,28 @@ mkdir -p /i915SRIOV/lib/modules/${UNAME}/kernel/drivers/gpu/drm/i915
 cd ${DATA_DIR}
 git clone https://github.com/strongtz/i915-sriov-dkms
 cd ${DATA_DIR}/i915-sriov-dkms
-git checkout master
+
+# Upstream master tracks the current mainline snapshot and requires kernel v6.17+.
+# Older unRAID kernels (6.12.x ... 6.16.x) need the maintained older release
+# 2026.03.05.6, which contains the pci_resize_resource() 4-argument conftest fix
+# (strongtz/i915-sriov-dkms commit 65fd1a7 / release 2026.03.05.3, issue #467).
+KERNEL_SHORT="${UNAME%%-*}"
+case "${KERNEL_SHORT}" in
+    6.12.*|6.13.*|6.14.*|6.15.*|6.16.*)
+        git checkout 2026.03.05.6
+        ;;
+    *)
+        git checkout master
+        ;;
+esac
+
 PLUGIN_VERSION="$(git log -1 --format="%cs" | sed 's/-//g')"
 
 # Compile custom i915 SR-IOV module and copy it over to temporary location
 make -j${CPU_COUNT} -C ${DATA_DIR}/linux-$UNAME M=${DATA_DIR}/i915-sriov-dkms
 cp ${DATA_DIR}/i915-sriov-dkms/i915.ko /i915SRIOV/lib/modules/${UNAME}/kernel/drivers/gpu/drm/i915/
+mkdir -p /i915SRIOV/lib/modules/${UNAME}/updates/compat
+cp ${DATA_DIR}/i915-sriov-dkms/compat/intel_sriov_compat.ko /i915SRIOV/lib/modules/${UNAME}/updates/compat/
 
 # Compress modules
 while read -r line
